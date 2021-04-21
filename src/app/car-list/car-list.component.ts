@@ -19,9 +19,13 @@ export class CarListComponent implements OnInit {
         this.giphyService.get(car.name).subscribe(url => car.giphyUrl = url);
         if(car.ownerDni != null){ 
           this.ownerService.getOwner(car.ownerDni).subscribe((resp:any) => {
-            car.ownerName = resp._embedded.owners[0].name;
+            if(resp._embedded.owners.length!){
+              car.ownerName = resp._embedded.owners[0].name;
+            }
+            else{
+              car.ownerName = "No owner registered";
+            }
           });
-          console.log(car.ownerName);
         }
       }
       console.log(this.cars);

@@ -13,7 +13,6 @@ export class OwnerListComponent implements OnInit {
 
   ngOnInit() {
     this.ownerService.getAll().subscribe((resp:any)=>{
-      console.log(resp);
       this.owners = resp._embedded.owners;
       console.log(this.owners);
     })

@@ -48,6 +48,8 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
     }, error => console.error(error));
   }
   remove(href:string){
-
+    this.ownerService.remove(href).subscribe(result => {
+      this.gotoList();
+    }, error => console.error(error));
   }
 }

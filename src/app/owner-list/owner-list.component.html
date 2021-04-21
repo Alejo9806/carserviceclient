@@ -4,7 +4,7 @@
     <mat-list>
       <mat-list-item *ngFor="let owner of owners">
         <h3 mat-line>
-          <a [routerLink]="['/owner-edit', owner.dni]">{{owner.name}}, Profession: {{owner.profession}}, DNI:{{owner.dni}}</a>
+          <a *ngIf="owner.dni"  [routerLink]="['/owner-edit', owner.dni]">{{owner.name}}, Profession: {{owner.profession}}, DNI:{{owner.dni}}</a>
         </h3>
       </mat-list-item>
     </mat-list>
