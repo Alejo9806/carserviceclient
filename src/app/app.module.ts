@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule} from '@angular/forms';
 import { MatButtonModule, MatCardModule, MatInputModule, MatListModule, MatToolbarModule,MatMenuModule} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
