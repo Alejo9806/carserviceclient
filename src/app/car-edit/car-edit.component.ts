@@ -13,7 +13,6 @@ import {OwnerService} from '../shared/owner/owner.service';
 })
 export class CarEditComponent implements OnInit, OnDestroy {
   car: any = {};
-  noOwner:string;
   sub: Subscription;
 
   constructor(private route: ActivatedRoute,
@@ -49,17 +48,11 @@ export class CarEditComponent implements OnInit, OnDestroy {
     this.router.navigate(['/car-list']);
   }
 
-  save(form: NgForm,ownerDni:HTMLInputElement) {
-    console.log(ownerDni.value)
-    this.ownerService.getOwner(ownerDni.value).subscribe((resp:any) =>{
-      if(resp._embedded.owners.length!){
+  save(form: NgForm) {
         this.carService.save(form).subscribe(result => {
           this.gotoList();
         }, error => console.error(error));
-      }else{
-            this.noOwner="NO owner registered, try with other dni"
-      }
-    })
+
   }
 
   remove(href) {

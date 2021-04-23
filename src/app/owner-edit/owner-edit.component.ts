@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
 import { OwnerService } from '../shared/owner/owner.service';
+import { CarService } from '../shared/car/car.service';
 
 @Component({
   selector: 'app-owner-edit',
@@ -12,8 +13,9 @@ import { OwnerService } from '../shared/owner/owner.service';
 export class OwnerEditComponent implements OnInit, OnDestroy {
   owner: any = {};
   sub: Subscription;
+  car:any ={};
 
-  constructor(private route: ActivatedRoute, private router: Router, private ownerService:OwnerService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private ownerService:OwnerService,private carService:CarService) { }
 
   ngOnInit() {
     this.sub = this.route.params.subscribe(params => {
@@ -47,7 +49,25 @@ export class OwnerEditComponent implements OnInit, OnDestroy {
       this.gotoList();
     }, error => console.error(error));
   }
-  remove(href:string){
+  remove(href:string,dni:string){
+    this.carService.getAll().subscribe((resp:any)=>{
+      for (let index = 0; index < resp.length; index++) {
+        if(resp[index].ownerDni==dni){
+          this.carService.get(resp[index].id).subscribe((result:any)=>{
+              this.car ={
+                name:result.name,
+                ownerDni:null,
+                href:result._links.self.href
+
+              }
+              this.carService.save(this.car).subscribe(resp=>{
+
+              });
+          })
+        }
+      }
+    })
+
     this.ownerService.remove(href).subscribe(result => {
       this.gotoList();
     }, error => console.error(error));

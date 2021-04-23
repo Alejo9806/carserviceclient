@@ -4,7 +4,7 @@
     <mat-list>
       <mat-list-item *ngFor="let owner of owners">
         <h3 mat-line>
-          <input type="checkbox" (change)="ownersChecks(owner._links.self.href,$event)">
+          <input type="checkbox" (change)="ownersChecks(owner._links.self.href,owner.dni,$event)">
           <a *ngIf="owner.dni" [routerLink]="['/owner-edit', owner.dni]" style="color: black;" type="checkbox"><button  mat-button >{{owner.name}}, Profession: {{owner.profession}}, DNI:{{owner.dni}}</button> </a>
         </h3>
       </mat-list-item>
